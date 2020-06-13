@@ -34,7 +34,9 @@ exports.createProduct = (req, res) => {
     const { name, description, price, category, stock } = fields;
 
     if (!name || !description || !price || !category || !stock) {
-      return res.status(400).json({ error: "Please include all fieldss" });
+      return res
+        .status(400)
+        .json({ error: "Please include all fieldss", fields });
     }
 
     let product = new Product(fields);
@@ -50,7 +52,7 @@ exports.createProduct = (req, res) => {
 
     //save to db
     product.save((err, product) => {
-      if (err) res.status(400).json({ error: "Could not save product!!" });
+      if (err) res.status(400).json({ err, error: "Could not save product!!" });
 
       res.json(product);
     });
