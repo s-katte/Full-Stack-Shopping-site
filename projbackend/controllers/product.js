@@ -157,3 +157,11 @@ exports.updateStock = (req, res, next) => {
     next();
   });
 };
+
+exports.getAllUniqueCategories = (req, res) => {
+  Product.distinct("category", {}, (err, category) => {
+    if (err) res.status(400).json({ error: "Error in finding categories!" });
+
+    res.json(category);
+  });
+};
