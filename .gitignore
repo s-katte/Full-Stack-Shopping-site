@@ -3,6 +3,7 @@
 
 
 /projfrontend/node_modules
+/projfrontend/.env
 
 /projfrontend/.pnp
 /projfrontend.pnp.js
