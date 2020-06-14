@@ -29,7 +29,6 @@ const Signup = () => {
 
   return (
     <Base title="Sign Up Page" description="A page for user to sign up!">
-      <h1>Signup works</h1>
       {signupForm()}
     </Base>
   );
