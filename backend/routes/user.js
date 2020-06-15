@@ -6,12 +6,8 @@ const {
   getUser,
   updateUser,
   userPurchaseList,
-} = require("./../controllers/user");
-const {
-  isSignedIn,
-  isAdmin,
-  isAuthenticated,
-} = require("./../controllers/auth");
+} = require("../controllers/user");
+const { isSignedIn, isAdmin, isAuthenticated } = require("../controllers/auth");
 
 router.param("userId", getUserById);
 

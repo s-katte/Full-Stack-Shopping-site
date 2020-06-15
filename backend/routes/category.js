@@ -7,13 +7,9 @@ const {
   getAllCategory,
   updateCategory,
   removeCategory,
-} = require("./../controllers/category");
-const {
-  isSignedIn,
-  isAuthenticated,
-  isAdmin,
-} = require("./../controllers/auth");
-const { getUserById } = require("./../controllers/user");
+} = require("../controllers/category");
+const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
+const { getUserById } = require("../controllers/user");
 
 //params
 router.param("userId", getUserById);
