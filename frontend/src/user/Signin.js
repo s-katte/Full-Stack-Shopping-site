@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Base from "./../core/Base";
+import Base from "../core/Base";
 import { Link, Redirect } from "react-router-dom";
 
-import { signin, authenticate, isAuthenticated } from "./../auth/helper";
+import { signin, authenticate, isAuthenticated } from "../auth/helper";
 
 const Signin = () => {
   const [values, setValues] = useState({

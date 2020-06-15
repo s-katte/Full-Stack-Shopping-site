@@ -1,27 +1,27 @@
-/projbackend/node_modules
-/projbackend/.env
+/backend/node_modules
+/backend/.env
 
 
-/projfrontend/node_modules
-/projfrontend/.env
+/frontend/node_modules
+/frontend/.env
 
-/projfrontend/.pnp
-/projfrontend.pnp.js
+/frontend/.pnp
+/frontend.pnp.js
 
 # testing
-/projfrontend/coverage
+/frontend/coverage
 
 # production
-/projfrontend/build
+/frontend/build
 
 
 # misc
-/projfrontend/.DS_Store
-/projfrontend/.env.local
-/projfrontend/.env.development.local
-/projfrontend/.env.test.local
-/projfrontend/.env.production.local
+/frontend/.DS_Store
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
 
-/projfrontend/npm-debug.log*
-/projfrontend/yarn-debug.log*
-/projfrontend/yarn-error.log*
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
