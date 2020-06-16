@@ -1,25 +1,5 @@
-import React, { useState } from "react";
-import Base from "../core/Base";
-import { Link } from "react-router-dom";
-
-const AddProduct = () => {
-  const [values, setValues] = useState({
-    name: "",
-    description: "",
-    price: "",
-    stock: "",
-  });
-
-  const { name, description, price, stock } = values;
-
-  const onSubmit = () => {
-    //
-  };
-
-  const handleChange = (name) => (event) => {};
-
-  const createProductForm = () => (
-    <form>
+const createProductForm = () => (
+    <form >
       <span>Post photo</span>
       <div className="form-group">
         <label className="btn btn-block btn-success">
@@ -79,31 +59,9 @@ const AddProduct = () => {
           value={stock}
         />
       </div>
-
-      <button
-        type="submit"
-        onClick={onSubmit}
-        className="btn btn-outline-success mb-3"
-      >
+      
+      <button type="submit" onClick={onSubmit} className="btn btn-outline-success">
         Create Product
       </button>
     </form>
   );
-
-  return (
-    <Base
-      title="Add a product here!"
-      description="Welcome to product creation section"
-      className="container bg-info p-4"
-    >
-      <Link className="btn btn-mdn btn-dark mb-3" to="/admin/dashboard">
-        Admin Home
-      </Link>
-      <div className="row bg-dark text-white rounded">
-        <div className="col-md-8 offset-md-2">{createProductForm()}</div>
-      </div>
-    </Base>
-  );
-};
-
-export default AddProduct;

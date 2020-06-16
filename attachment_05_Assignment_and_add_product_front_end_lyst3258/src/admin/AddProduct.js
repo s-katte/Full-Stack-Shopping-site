@@ -7,7 +7,7 @@ const AddProduct = () => {
     name: "",
     description: "",
     price: "",
-    stock: "",
+    stock: ""
   });
 
   const { name, description, price, stock } = values;
@@ -16,7 +16,9 @@ const AddProduct = () => {
     //
   };
 
-  const handleChange = (name) => (event) => {};
+  const handleChange = name => event => {
+    //
+  };
 
   const createProductForm = () => (
     <form>
@@ -96,7 +98,7 @@ const AddProduct = () => {
       description="Welcome to product creation section"
       className="container bg-info p-4"
     >
-      <Link className="btn btn-mdn btn-dark mb-3" to="/admin/dashboard">
+      <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
         Admin Home
       </Link>
       <div className="row bg-dark text-white rounded">
