@@ -19,10 +19,11 @@ export const createCategory = (userId, token, category) => {
 
 //get all categories
 export const getCategories = () => {
-  return fetch(`${API}/api/categories`, {
+  return fetch(`${API}/categories`, {
     method: "GET",
   })
     .then((response) => {
+      // console.log(response.json());
       return response.json();
     })
     .catch((error) => console.log(error));
