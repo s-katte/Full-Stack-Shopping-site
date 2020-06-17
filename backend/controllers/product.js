@@ -15,13 +15,13 @@ exports.getProductById = (req, res, next, id) => {
       req.product = product;
       next();
     }); //destructure the fields
-  const { name, description, price, category, stock } = fields;
+  // const { name, description, price, category, stock } = fields;
 
-  if (!name || !description || !price || !category || !stock) {
-    return res.status(400).json({
-      error: "Please include all fields",
-    });
-  }
+  // if (!name || !description || !price || !category || !stock) {
+  //   return res.status(400).json({
+  //     error: "Please include all fields",
+  //   });
+  // }
 };
 
 //create

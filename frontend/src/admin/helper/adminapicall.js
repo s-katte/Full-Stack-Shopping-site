@@ -46,7 +46,7 @@ export const createProduct = (userId, token, product) => {
 };
 
 export const getProducts = () => {
-  return fetch(`${API}/api/products`, {
+  return fetch(`${API}/products`, {
     method: "GET",
   })
     .then((response) => {
@@ -68,7 +68,7 @@ export const getProduct = (productId) => {
 export const deleteProduct = (productId, userId, token) => {
   return fetch(`${API}/product/${productId}/${userId}`, {
     method: "DELETE",
-    headers: { Accept: "application/json", Authorization: "Bearer ${token}" },
+    headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
   })
     .then((response) => {
       return response.json();
