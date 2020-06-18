@@ -92,7 +92,7 @@ exports.deleteProduct = (req, res) => {
 
 //update
 exports.updateProduct = (req, res) => {
-  let form = formidable.IncomingForm();
+  let form = new formidable.IncomingForm();
   form.keepExtensions = true;
 
   form.parse(req, (err, fields, file) => {
@@ -118,6 +118,7 @@ exports.updateProduct = (req, res) => {
       if (err)
         res.status(400).json({ err, error: "Could not update product!!" });
 
+      // console.log(product);
       res.json(product);
     });
   });
