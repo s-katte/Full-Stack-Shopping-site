@@ -22,3 +22,21 @@ export const loadCart = () => {
     }
   }
 };
+
+export const removeItemFromCart = (productId) => {
+  let cart = [];
+
+  if (typeof window != undefined) {
+    if (localStorage.getItem("cart")) {
+      cart = JSON.parse(localStorage.getItem("cart"));
+    }
+
+    cart.map((product, index) => {
+      if (productId === product._id) {
+        cart.splice(index, 1);
+      }
+    });
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+  return cart;
+};
