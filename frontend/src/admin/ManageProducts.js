@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
+
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
-import { isAuthenticated } from "../auth/helper";
+import { isAutheticated } from "../auth/helper";
 import { getProducts, deleteProduct } from "./helper/adminapicall";
 
-const Manageproducts = () => {
+const ManageProducts = () => {
   const [products, setProducts] = useState([]);
 
-  const { user, token } = isAuthenticated();
+  const { user, token } = isAutheticated();
 
   const preload = () => {
-    getProducts().then((data) => {
+    getProducts().then(data => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -23,8 +24,8 @@ const Manageproducts = () => {
     preload();
   }, []);
 
-  const deleteThisProduct = (productId) => {
-    deleteProduct(productId, user._id, token).then((data) => {
+  const deleteThisProduct = productId => {
+    deleteProduct(productId, user._id, token).then(data => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -41,6 +42,8 @@ const Manageproducts = () => {
       </Link>
       <div className="row">
         <div className="col-12">
+          <h2 className="text-center text-white my-3">Total 3 products</h2>
+
           {products.map((product, index) => {
             return (
               <div key={index} className="row text-center mb-2 ">
@@ -74,4 +77,4 @@ const Manageproducts = () => {
   );
 };
 
-export default Manageproducts;
+export default ManageProducts;

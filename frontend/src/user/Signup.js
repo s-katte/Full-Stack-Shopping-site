@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Base from "./../core/Base";
+import Base from "../core/Base";
 import { Link } from "react-router-dom";
-import { signup } from "./../auth/helper";
+import { signup } from "../auth/helper";
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -9,20 +9,20 @@ const Signup = () => {
     email: "",
     password: "",
     error: "",
-    success: false,
+    success: false
   });
 
   const { name, email, password, error, success } = values;
 
-  const handleChange = (name) => (event) => {
+  const handleChange = name => event => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = event => {
     event.preventDefault();
     setValues({ ...values, error: false });
     signup({ name, email, password })
-      .then((data) => {
+      .then(data => {
         if (data.error) {
           setValues({ ...values, error: data.error, success: false });
         } else {
@@ -32,14 +32,14 @@ const Signup = () => {
             email: "",
             password: "",
             error: "",
-            success: true,
+            success: true
           });
         }
       })
       .catch(console.log("Error in signup"));
   };
 
-  const signupForm = () => {
+  const signUpForm = () => {
     return (
       <div className="row">
         <div className="col-md-6 offset-sm-3 text-left">
@@ -62,11 +62,12 @@ const Signup = () => {
                 value={email}
               />
             </div>
+
             <div className="form-group">
               <label className="text-light">Password</label>
               <input
-                className="form-control"
                 onChange={handleChange("password")}
+                className="form-control"
                 type="password"
                 value={password}
               />
@@ -83,13 +84,13 @@ const Signup = () => {
   const successMessage = () => {
     return (
       <div className="row">
-        <div className="col col-md-6 offset-sm-3 text-left">
+        <div className="col-md-6 offset-sm-3 text-left">
           <div
             className="alert alert-success"
             style={{ display: success ? "" : "none" }}
           >
-            New Account was created successfully. Please{" "}
-            <Link to="/signin"> Login Here</Link>
+            New account was created successfully. Please
+            <Link to="/signin">Login Here</Link>
           </div>
         </div>
       </div>
@@ -99,7 +100,7 @@ const Signup = () => {
   const errorMessage = () => {
     return (
       <div className="row">
-        <div className="col col-md-6 offset-sm-3 text-left">
+        <div className="col-md-6 offset-sm-3 text-left">
           <div
             className="alert alert-danger"
             style={{ display: error ? "" : "none" }}
@@ -112,10 +113,10 @@ const Signup = () => {
   };
 
   return (
-    <Base title="Sign Up Page" description="A page for user to sign up!">
+    <Base title="Sign up page" description="A page for user to sign up!">
       {successMessage()}
       {errorMessage()}
-      {signupForm()}
+      {signUpForm()}
       <p className="text-white text-center">{JSON.stringify(values)}</p>
     </Base>
   );

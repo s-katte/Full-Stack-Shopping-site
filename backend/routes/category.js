@@ -1,21 +1,22 @@
 const express = require("express");
 const router = express.Router();
+
 const {
   getCategoryById,
   createCategory,
   getCategory,
   getAllCategory,
   updateCategory,
-  removeCategory,
+  removeCategory
 } = require("../controllers/category");
-const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
+const { isSignedIn, isAdmin, isAuthenticated } = require("../controllers/auth");
 const { getUserById } = require("../controllers/user");
 
 //params
 router.param("userId", getUserById);
 router.param("categoryId", getCategoryById);
 
-//actual routes
+//actual routers goes here
 
 //create
 router.post(
@@ -28,7 +29,7 @@ router.post(
 
 //read
 router.get("/category/:categoryId", getCategory);
-router.get("/categories/", getAllCategory);
+router.get("/categories", getAllCategory);
 
 //update
 router.put(
@@ -40,6 +41,7 @@ router.put(
 );
 
 //delete
+
 router.delete(
   "/category/:categoryId/:userId",
   isSignedIn,

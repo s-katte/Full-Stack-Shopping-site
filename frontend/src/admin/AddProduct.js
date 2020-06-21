@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
-import { getCategories, createProduct } from "./helper/adminapicall";
-import { isAuthenticated } from "../auth/helper";
+import { getCategories, createaProduct } from "./helper/adminapicall";
+import { isAutheticated } from "../auth/helper/index";
 
 const AddProduct = () => {
-  const { user, token } = isAuthenticated();
+  const { user, token } = isAutheticated();
 
   const [values, setValues] = useState({
     name: "",
@@ -18,25 +18,9 @@ const AddProduct = () => {
     loading: false,
     error: "",
     createdProduct: "",
-    getRedirect: false,
-    formData: "",
+    getaRedirect: false,
+    formData: ""
   });
-
-  const preload = () => {
-    getCategories().then((data) => {
-      // console.log(data);
-      if (data.error) {
-        setValues({ ...values, error: data.error });
-      } else {
-        setValues({ ...values, categories: data, formData: new FormData() });
-        // console.log(categories);
-      }
-    });
-  };
-
-  useEffect(() => {
-    preload();
-  }, []);
 
   const {
     name,
@@ -48,14 +32,29 @@ const AddProduct = () => {
     loading,
     error,
     createdProduct,
-    getRedirect,
-    formData,
+    getaRedirect,
+    formData
   } = values;
 
-  const onSubmit = (event) => {
+  const preload = () => {
+    getCategories().then(data => {
+      //console.log(data);
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({ ...values, categories: data, formData: new FormData() });
+      }
+    });
+  };
+
+  useEffect(() => {
+    preload();
+  }, []);
+
+  const onSubmit = event => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
-    createProduct(user._id, token, formData).then((data) => {
+    createaProduct(user._id, token, formData).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
@@ -67,17 +66,18 @@ const AddProduct = () => {
           photo: "",
           stock: "",
           loading: false,
-          createdProduct: data.name,
+          createdProduct: data.name
         });
       }
     });
   };
 
-  const handleChange = (name) => (event) => {
+  const handleChange = name => event => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value });
   };
+
   const successMessage = () => (
     <div
       className="alert alert-success mt-3"
@@ -148,7 +148,7 @@ const AddProduct = () => {
           onChange={handleChange("stock")}
           type="number"
           className="form-control"
-          placeholder="Quantity"
+          placeholder="Stock"
           value={stock}
         />
       </div>
@@ -169,7 +169,7 @@ const AddProduct = () => {
       description="Welcome to product creation section"
       className="container bg-info p-4"
     >
-      <Link className="btn btn-mdn btn-dark mb-3" to="/admin/dashboard">
+      <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
         Admin Home
       </Link>
       <div className="row bg-dark text-white rounded">

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { signout, isAuthenticated } from "../auth/helper";
+import { signout, isAutheticated } from "../auth/helper";
 
 const currentTab = (history, path) => {
   if (history.location.pathname === path) {
@@ -27,7 +27,7 @@ const Menu = ({ history }) => (
           Cart
         </Link>
       </li>
-      {isAuthenticated() && isAuthenticated().user.role === 0 && (
+      {isAutheticated() && isAutheticated().user.role === 0 && (
         <li className="nav-item">
           <Link
             style={currentTab(history, "/user/dashboard")}
@@ -38,7 +38,7 @@ const Menu = ({ history }) => (
           </Link>
         </li>
       )}
-      {isAuthenticated() && isAuthenticated().user.role === 1 && (
+      {isAutheticated() && isAutheticated().user.role === 1 && (
         <li className="nav-item">
           <Link
             style={currentTab(history, "/admin/dashboard")}
@@ -49,7 +49,7 @@ const Menu = ({ history }) => (
           </Link>
         </li>
       )}
-      {!isAuthenticated() && (
+      {!isAutheticated() && (
         <Fragment>
           <li className="nav-item">
             <Link
@@ -60,7 +60,6 @@ const Menu = ({ history }) => (
               Signup
             </Link>
           </li>
-
           <li className="nav-item">
             <Link
               style={currentTab(history, "/signin")}
@@ -72,7 +71,7 @@ const Menu = ({ history }) => (
           </li>
         </Fragment>
       )}
-      {isAuthenticated() && (
+      {isAutheticated() && (
         <li className="nav-item">
           <span
             className="nav-link text-warning"

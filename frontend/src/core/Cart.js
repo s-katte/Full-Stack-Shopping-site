@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./../styles.css";
+import "../styles.css";
+import { API } from "../backend";
 import Base from "./Base";
 import Card from "./Card";
-import { loadCart } from "./helper/CartHelper";
+import { loadCart } from "./helper/cartHelper";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ const Cart = () => {
   const loadAllProducts = () => {
     return (
       <div>
-        <h2>This seactio is to load prods</h2>
+        <h2>This section is to load products</h2>
         {products.map((product, index) => (
           <Card
             key={index}
@@ -29,11 +30,10 @@ const Cart = () => {
       </div>
     );
   };
-
   const loadCheckout = () => {
     return (
       <div>
-        <h2>This seactio is to load checkotu</h2>
+        <h2>This section for checkout</h2>
       </div>
     );
   };
@@ -42,7 +42,7 @@ const Cart = () => {
     <Base title="Cart Page" description="Ready to checkout">
       <div className="row text-center">
         <div className="col-6">{loadAllProducts()}</div>
-        <div className="col-6">{loadCheckout()}</div>
+        <div className="col-6">Payment Section</div>
       </div>
     </Base>
   );

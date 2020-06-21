@@ -1,22 +1,22 @@
 const express = require("express");
 const router = express.Router();
-
 const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
 const { getUserById, pushOrderInPurchaseList } = require("../controllers/user");
 const { updateStock } = require("../controllers/product");
+
 const {
   getOrderById,
   createOrder,
   getAllOrders,
-  updateStatus,
   getOrderStatus,
+  updateStatus
 } = require("../controllers/order");
 
 //params
 router.param("userId", getUserById);
 router.param("orderId", getOrderById);
 
-//actual routes
+//Actual routes
 //create
 router.post(
   "/order/create/:userId",
@@ -26,7 +26,6 @@ router.post(
   updateStock,
   createOrder
 );
-
 //read
 router.get(
   "/order/all/:userId",
@@ -36,7 +35,7 @@ router.get(
   getAllOrders
 );
 
-//status
+//status of order
 router.get(
   "/order/status/:userId",
   isSignedIn,
@@ -44,7 +43,6 @@ router.get(
   isAdmin,
   getOrderStatus
 );
-
 router.put(
   "/order/:orderId/status/:userId",
   isSignedIn,

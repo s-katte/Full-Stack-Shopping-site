@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Base from "../core/Base";
-import { isAuthenticated } from "../auth/helper";
+import { isAutheticated } from "../auth/helper";
 import { Link } from "react-router-dom";
 import { createCategory } from "./helper/adminapicall";
 
@@ -9,7 +9,7 @@ const AddCategory = () => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const { user, token } = isAuthenticated();
+  const { user, token } = isAutheticated();
 
   const goBack = () => (
     <div className="mt-5">
@@ -19,21 +19,20 @@ const AddCategory = () => {
     </div>
   );
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setError("");
     setName(event.target.value);
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = event => {
     event.preventDefault();
     setError("");
     setSuccess(false);
 
     //backend request fired
-    createCategory(user._id, token, { name }).then((data) => {
+    createCategory(user._id, token, { name }).then(data => {
       if (data.error) {
-        setError(error);
-        setName("");
+        setError(true);
       } else {
         setError("");
         setSuccess(true);
@@ -43,20 +42,19 @@ const AddCategory = () => {
   };
 
   const successMessage = () => {
-    console.log(success);
     if (success) {
-      return <h4 className=" text-success">Category created successfully!</h4>;
+      return <h4 className="text-success">Category created successfully</h4>;
     }
   };
 
-  const errorMessage = () => {
+  const warningMessage = () => {
     if (error) {
-      return <h4 className="text-success">Failed to create Category!</h4>;
+      return <h4 className="text-success">Failed to create category</h4>;
     }
   };
 
   const myCategoryForm = () => (
-    <form className="">
+    <form>
       <div className="form-group">
         <p className="lead">Enter the category</p>
         <input
@@ -77,14 +75,14 @@ const AddCategory = () => {
 
   return (
     <Base
-      className="container bg-info p-5"
       title="Create a category here"
       description="Add a new category for new tshirts"
+      className="container bg-info p-4"
     >
       <div className="row bg-white rounded">
-        <div className="col-8 offset-md-2">
+        <div className="col-md-8 offset-md-2">
           {successMessage()}
-          {errorMessage()}
+          {warningMessage()}
           {myCategoryForm()}
           {goBack()}
         </div>

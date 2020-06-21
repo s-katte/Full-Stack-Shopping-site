@@ -1,12 +1,12 @@
 import React from "react";
-import Base from "./../core/Base";
+import Base from "../core/Base";
 
-const UserDashboard = () => {
+const UserDashBoard = () => {
   return (
-    <Base title="UserDashboard Page">
-      <h1>This is UserDashboard Page</h1>
+    <Base title="UserDashBoard page">
+      <h1>THis is UserDashBoard page</h1>
     </Base>
   );
 };
 
-export default UserDashboard;
+export default UserDashBoard;

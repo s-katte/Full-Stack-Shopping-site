@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
-import { isAuthenticated } from "../auth/helper";
+import { isAutheticated } from "../auth/helper";
 import { getCategories, deleteCategory } from "./helper/adminapicall";
 
 const ManageCategories = () => {
   const [categories, setCategories] = useState([]);
 
-  const { user, token } = isAuthenticated();
+  const { user, token } = isAutheticated();
 
   const preload = () => {
     getCategories().then((data) => {

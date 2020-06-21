@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import {
   getCategories,
   getProduct,
-  updateProduct,
+  updateProduct
 } from "./helper/adminapicall";
-import { isAuthenticated } from "../auth/helper";
+import { isAutheticated } from "../auth/helper/index";
 
 const UpdateProduct = ({ match }) => {
-  const { user, token } = isAuthenticated();
+  const { user, token } = isAutheticated();
 
   const [values, setValues] = useState({
     name: "",
@@ -22,8 +22,8 @@ const UpdateProduct = ({ match }) => {
     loading: false,
     error: "",
     createdProduct: "",
-    getRedirect: false,
-    formData: "",
+    getaRedirect: false,
+    formData: ""
   });
 
   const {
@@ -36,16 +36,17 @@ const UpdateProduct = ({ match }) => {
     loading,
     error,
     createdProduct,
-    getRedirect,
-    formData,
+    getaRedirect,
+    formData
   } = values;
 
-  const preload = (productId) => {
-    getProduct(productId).then((data) => {
-      preloadCategories();
+  const preload = productId => {
+    getProduct(productId).then(data => {
+      //console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
+        preloadCategories();
         setValues({
           ...values,
           name: data.name,
@@ -53,18 +54,21 @@ const UpdateProduct = ({ match }) => {
           price: data.price,
           category: data.category._id,
           stock: data.stock,
-          formData: new FormData(),
+          formData: new FormData()
         });
       }
     });
   };
 
   const preloadCategories = () => {
-    getCategories().then((data) => {
+    getCategories().then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        setValues({ categories: data, formData: new FormData() });
+        setValues({
+          categories: data,
+          formData: new FormData()
+        });
       }
     });
   };
@@ -73,11 +77,13 @@ const UpdateProduct = ({ match }) => {
     preload(match.params.productId);
   }, []);
 
-  const onSubmit = (event) => {
+  //TODO: work on it
+  const onSubmit = event => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
+
     updateProduct(match.params.productId, user._id, token, formData).then(
-      (data) => {
+      data => {
         if (data.error) {
           setValues({ ...values, error: data.error });
         } else {
@@ -89,18 +95,19 @@ const UpdateProduct = ({ match }) => {
             photo: "",
             stock: "",
             loading: false,
-            createdProduct: data.name,
+            createdProduct: data.name
           });
         }
       }
     );
   };
 
-  const handleChange = (name) => (event) => {
+  const handleChange = name => event => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value });
   };
+
   const successMessage = () => (
     <div
       className="alert alert-success mt-3"
@@ -157,8 +164,6 @@ const UpdateProduct = ({ match }) => {
           className="form-control"
           placeholder="Category"
         >
-          {console.log("CATEGORY: ", category)}
-          {console.log("CATEGORIES: ", categories)}
           <option>Select</option>
           {categories &&
             categories.map((cate, index) => (
@@ -173,7 +178,7 @@ const UpdateProduct = ({ match }) => {
           onChange={handleChange("stock")}
           type="number"
           className="form-control"
-          placeholder="Quantity"
+          placeholder="Stock"
           value={stock}
         />
       </div>
@@ -194,7 +199,7 @@ const UpdateProduct = ({ match }) => {
       description="Welcome to product creation section"
       className="container bg-info p-4"
     >
-      <Link className="btn btn-mdn btn-dark mb-3" to="/admin/dashboard">
+      <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
         Admin Home
       </Link>
       <div className="row bg-dark text-white rounded">

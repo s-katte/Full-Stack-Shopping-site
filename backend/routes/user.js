@@ -5,19 +5,15 @@ const {
   getUserById,
   getUser,
   updateUser,
-  userPurchaseList,
+  userPurchaseList
 } = require("../controllers/user");
-const { isSignedIn, isAdmin, isAuthenticated } = require("../controllers/auth");
+const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
 
 router.param("userId", getUserById);
 
-//GET user by ID
 router.get("/user/:userId", isSignedIn, isAuthenticated, getUser);
-
-//UPDATE user information
 router.put("/user/:userId", isSignedIn, isAuthenticated, updateUser);
 
-//GET order list
 router.get(
   "/orders/user/:userId",
   isSignedIn,
