@@ -7,9 +7,9 @@ const Card = ({
   product,
   addtoCart = true,
   removeFromCart = false,
-  setReload = f => f,
+  setReload = (f) => f,
   //   function(f){return f}
-  reload = undefined
+  reload = undefined,
 }) => {
   const [redirect, setRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
@@ -22,13 +22,13 @@ const Card = ({
     addItemToCart(product, () => setRedirect(true));
   };
 
-  const getARedirect = redirect => {
+  const getARedirect = (redirect) => {
     if (redirect) {
       return <Redirect to="/cart" />;
     }
   };
 
-  const showAddToCart = addtoCart => {
+  const showAddToCart = (addtoCart) => {
     return (
       addtoCart && (
         <button
@@ -41,7 +41,7 @@ const Card = ({
     );
   };
 
-  const showRemoveFromCart = removeFromCart => {
+  const showRemoveFromCart = (removeFromCart) => {
     return (
       removeFromCart && (
         <button
